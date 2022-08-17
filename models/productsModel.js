@@ -21,8 +21,19 @@ const addProduct = async (name) => {
   return data;
 };
 
+const setProduct = async (id, name) => {
+  const checkProduct = await findById(id);
+  if (checkProduct.length === 0) return false;
+
+  const sql = 'UPDATE StoreManager.products SET name = ? WHERE id = ?;';
+  const result = await connection.execute(sql, [name, id]); // usar chaves não altera a ordem
+
+  return result;
+};
+
 module.exports = {
   getAll,
   findById,
   addProduct,
+  setProduct,
 };

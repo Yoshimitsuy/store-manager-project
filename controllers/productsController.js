@@ -24,8 +24,25 @@ const addProduct = async (req, res) => {
   return res.status(201).json(newProduct);
 };
 
+const setProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { name } = req.body;
+
+    const data = await productsServices.setProduct(id, name);
+    
+    if (data.code === 404) return res.status(data.code).json({ message: 'Product not found' });
+
+    const dataOk = { id: data.id, name: data.name };
+    res.status(data.code).json(dataOk);
+  } catch (err) {
+    return res.status(500).json({ message: 'Error setPoduct' });
+  }
+};
+
 module.exports = {
   getAll,
   findById,
   addProduct,
+  setProduct,
 };

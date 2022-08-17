@@ -22,9 +22,19 @@ const addProduct = async (name) => {
 
   return data;
 };
+
+const setProduct = async (id, name) => {
+  const data = await productsModel.setProduct(id, name);
+  // console.error(data);
+  if (!data) return { code: 404 };
+
+  const dataOk = { code: 200, id, name };
+  return dataOk;
+};
   
 module.exports = {
   getAll,
   findById,
   addProduct,
+  setProduct,
 };
