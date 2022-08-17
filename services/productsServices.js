@@ -31,10 +31,17 @@ const setProduct = async (id, name) => {
   const dataOk = { code: 200, id, name };
   return dataOk;
 };
+
+const deleteProduct = async (id) => {
+  const data = await productsModel.deleteProduct(id);
+
+  return data;
+};
   
 module.exports = {
   getAll,
   findById,
   addProduct,
   setProduct,
+  deleteProduct,
 };
