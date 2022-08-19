@@ -7,7 +7,7 @@ const sinon = require('sinon');
 const conec = require('../../../models/connection');
 const productsModel = require('../../../models/productsModel');
 
-describe('Testes da camada productsModel', () => {
+describe('01 - Models Tests - camada productsModel', () => {
 
   describe('1 - Verifica se retorna todos os produtos', () => {
 
@@ -69,7 +69,7 @@ describe('Testes da camada productsModel', () => {
 
     it(' alterando produto', async () => {
       const result = await productsModel.setProduct(nameMock, idMock);
-      expect(result).to.be.a('object')
+      // expect(result).to.be.a('object')
       expect(result.setRows).to.be.equal(1)
     })
   })
