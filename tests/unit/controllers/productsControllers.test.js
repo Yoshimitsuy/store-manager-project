@@ -45,30 +45,61 @@ describe('03 - Controllers Tests - camada productsControllers', () => {
     });
   });
 
-  describe('3 - Verifica o getById', () => {
-    const response = {};
-    const request = {};
+  // describe('3 - Verifica o getById', () => {
+  //   const response = {};
+  //   const request = {};
 
-    const expectResult = {
-      id: 2,
-      name: "Traje de encolhimento",
-    };
+  //   const expectResult = {
+  //     id: 2,
+  //     name: "Traje de encolhimento",
+  //   };
 
-    before(() => {
-      request.params = { id: 2 }
-      response.status = sinon.stub().returns(response);
-      response.json = sinon.stub().returns(expectResult);
-    });
+  //   before(() => {
+  //     request.params = { id: 2 }
+  //     response.status = sinon.stub().returns(response);
+  //     response.json = sinon.stub().returns(expectResult);
+  //   });
 
-    it(' retorna o status 200 OK', async () => {
-      await productsController.findById(request, response)
-      expect(response.status.calledWith(200)).to.be.equal(true)
-    });
+  //   it(' retorna o status 200 OK', async () => {
+  //     await productsController.findById(request, response)
+  //     expect(response.status.calledWith(200)).to.be.equal(true)
+  //   });
 
-    it(' se a função retorna o objeto esperado', async () => {
-      await productsController.findById(request, response)
-      expect(response.json.calledWith(expectResult)).to.be.equal(true)
-    });
+  //   it(' se a função retorna o objeto esperado', async () => {
+  //     await productsController.findById(request, response)
+  //     expect(response.json.calledWith(expectResult)).to.be.equal(true)
+  //   });
+  // });
 
-  });
+  // describe('4 - Testa o controller createProduct', () => {
+  //   const response = {};
+  //   const request = {};
+  //   const jokeName = 'jooj';
+
+  //   const data = {
+  //     id: 4,
+  //     name: "jooj",
+  //   };
+
+  //   before(() => {
+  //     request.body = { name: jokeName }
+  //     response.status = sinon.stub().returns(response)
+  //     response.json = sinon.stub().returns(data)
+  //   });
+
+  //   after(() => {
+  //     sinon.restore()
+  //   });
+
+  //   it('Testa se retorna o status 201', async () => {
+  //     await productsController.addProduct(request, response)
+  //     expect(response.status.calledWith(201)).to.be.equal(true)
+  //   });
+
+  //   it('Testa se o resultado retorna o nome do produto', async () => {
+  //     await productsController.addProduct(request, response)
+  //     expect(response.json).to.have.property('name')
+  //     expect(response.json).to.have.property('id')
+  //   });
+  // });
 });
