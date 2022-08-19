@@ -21,4 +21,36 @@ describe('Testes da camada productsModel', () => {
       expect(result).to.be.not.empty
     });
   });
+
+  describe('Verifica se retorna ID do produto pesquisado', () => {
+    const idMock = 1
+
+    const idMockProduct = [{
+      id: 1,
+      name: "Martelo de Thor",
+    }];
+
+    it('Verifica se retorna um array', async () => {
+      const result = await productsModel.findById(idMock)
+      expect(result).to.be.a('array')
+    })
+
+    it('Verifica se o array não está vazio', async () => {
+      const result = await productsModel.findById(idMock)
+      expect(result).to.be.not.empty
+    })
+
+    it('Verifica se retorna o "Martelo do Thor"', async () => {
+      const result = await productsModel.findById(idMock)
+      expect(result).to.deep.equal(idMockProduct)
+    })
+  });
+
+  describe('Verifica se é possível adicionar um produto novo', () => {
+    const newProduct = 'Armadilha Venenosa'
+    it('Verifica se retorna um objeto', async () => {
+      const result = await productsModel.addProduct(newProduct)
+      expect(result).to.be.a('object')
+    });
+  });
 });
