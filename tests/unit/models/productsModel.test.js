@@ -9,20 +9,20 @@ const productsModel = require('../../../models/productsModel');
 
 describe('Testes da camada productsModel', () => {
 
-  describe('Verifica se retorna todos os produtos', () => {
+  describe('1 - Verifica se retorna todos os produtos', () => {
 
-    it('Verifica se retorna um array', async () => {
+    it(' se retorna um array', async () => {
       const result = await productsModel.getAll()
       expect(result).to.be.a('array')
     });
 
-    it('Verifica se o array não está vazio', async () => {
+    it(' se o array não está vazio', async () => {
       const result = await productsModel.getAll()
       expect(result).to.be.not.empty
     });
   });
 
-  describe('Verifica se retorna ID do produto pesquisado', () => {
+  describe('2 - Verifica se retorna ID do produto pesquisado', () => {
     const idMock = 1
 
     const idMockProduct = [{
@@ -30,27 +30,66 @@ describe('Testes da camada productsModel', () => {
       name: "Martelo de Thor",
     }];
 
-    it('Verifica se retorna um array', async () => {
+    it(' se retorna um array', async () => {
       const result = await productsModel.findById(idMock)
       expect(result).to.be.a('array')
     })
 
-    it('Verifica se o array não está vazio', async () => {
+    it(' se o array não está vazio', async () => {
       const result = await productsModel.findById(idMock)
       expect(result).to.be.not.empty
     })
 
-    it('Verifica se retorna o "Martelo do Thor"', async () => {
+    it(' se retorna o "Martelo do Thor"', async () => {
       const result = await productsModel.findById(idMock)
       expect(result).to.deep.equal(idMockProduct)
     })
   });
 
-  describe('Verifica se é possível adicionar um produto novo', () => {
+  describe('3 - Verifica se é possível adicionar um produto novo', () => {
     const newProduct = 'Armadilha Venenosa'
-    it('Verifica se retorna um objeto', async () => {
+    it(' se retorna um objeto', async () => {
       const result = await productsModel.addProduct(newProduct)
       expect(result).to.be.a('object')
     });
+  }); // #####################
+
+  describe('4 - Verifica se é possível alterar um produto', async () => {
+    const nameMock = "Martelo do Batman";
+    const idMock = 1
+
+    before(() => {
+      const execute = [{ setRows: 1 }]
+      sinon.stub(conec, 'execute').resolves(execute)
+    })
+
+    after(() => {
+      conec.execute.restore()
+    })
+
+    it(' alterando produto', async () => {
+      const result = await productsModel.setProduct(nameMock, idMock);
+      expect(result).to.be.a('object')
+      expect(result.setRows).to.be.equal(1)
+    })
+  })
+
+  describe('5 - Verifica se é possível deletar um produto', () => {
+    const id = 1
+
+    before(() => {
+      const execute = [{ settedRows: 1 }];
+      sinon.stub(conec, 'execute').resolves(execute)
+    })
+
+    after(() => {
+      conec.execute.restore()
+    });
+
+    it(' deletando produto', async () => {
+      const result = await productsModel.deleteProduct(id)
+      expect(result.settedRows).to.be.equal(undefined)
+    });
   });
+
 });
